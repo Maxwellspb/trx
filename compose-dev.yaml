@@ -40,6 +40,11 @@ services:
           - postgres_data:/var/lib/postgresql
       networks:
           - trx-network
+      healthcheck:
+          test: [ "CMD", "pg_isready", "-d", "${POSTGRES_DB:-app}", "-U", "${POSTGRES_USER:-app}" ]
+          timeout: 5s
+          retries: 5
+          start_period: 60s
   rabbitmq-local:
       image: rabbitmq:4.3.4-management
       container_name: trx-rabbitmq-dev

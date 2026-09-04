@@ -1,24 +1,33 @@
 <?php
 
-namespace App\Modules\Transportation\Transporter\Presentation\Http\v1\Request;
+namespace App\Modules\Transportation\Transporter\Presentation\Http\v1\Response;
 
-use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Attribute\Groups;
 use OpenApi\Attributes as OA;
 
 #[OA\Schema(
-    schema: 'CreateTransporterRequestDto',
-    description: 'Данные для создания перевозчика',
-    required: ['orgName', 'shortName', 'orgAddress', 'inn', 'kpp', 'ogrn'],
+    schema: 'TransporterResponseDto',
+    description: 'Данные перевозчика',
+    required: ['id', 'shortName']
 )]
-final readonly class CreateTransporterRequestDto
+final readonly class TransporterResponseDto
 {
     public function __construct(
+        #[OA\Property(
+            description: 'ID перевозчика',
+            type: 'string',
+            format: 'uuid',
+            example: '550e8400-e29b-41d4-a716-446655440000'
+        )]
+        #[Groups(['transporter:full_read', 'transporter:list'])]
+        public string $id,
+
         #[OA\Property(
             description: 'Полное название перевозчика',
             type: 'string',
             example: 'Общество с ограниченной ответственностью СтройАвтоТранс'
         )]
-        #[Assert\NotBlank]
+        #[Groups(['transporter:full_read'])]
         public string $orgName,
 
         #[OA\Property(
@@ -26,7 +35,7 @@ final readonly class CreateTransporterRequestDto
             type: 'string',
             example: 'СтройАвтоТранс'
         )]
-        #[Assert\NotBlank]
+        #[Groups(['transporter:full_read', 'transporter:list'])]
         public string $shortName,
 
         #[OA\Property(
@@ -34,7 +43,7 @@ final readonly class CreateTransporterRequestDto
             type: 'string',
             example: 'РФ, СПб, Невский пр. 1'
         )]
-        #[Assert\NotBlank]
+        #[Groups(['transporter:full_read'])]
         public string $orgAddress,
 
         #[OA\Property(
@@ -42,7 +51,7 @@ final readonly class CreateTransporterRequestDto
             type: 'string',
             example: '6311573037'
         )]
-        #[Assert\NotBlank]
+        #[Groups(['transporter:full_read'])]
         public string $inn,
 
         #[OA\Property(
@@ -50,7 +59,7 @@ final readonly class CreateTransporterRequestDto
             type: 'string',
             example: '620943127'
         )]
-        #[Assert\NotBlank]
+        #[Groups(['transporter:full_read'])]
         public string $kpp,
 
         #[OA\Property(
@@ -58,7 +67,7 @@ final readonly class CreateTransporterRequestDto
             type: 'string',
             example: '6014667274770'
         )]
-        #[Assert\NotBlank]
+        #[Groups(['transporter:full_read'])]
         public string $ogrn,
     ){}
 }

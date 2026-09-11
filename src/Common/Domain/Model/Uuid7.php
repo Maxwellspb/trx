@@ -9,4 +9,9 @@ readonly class Uuid7
     ) {
 
     }
+
+    public static function fromString(string $value): self
+    {
+        return new self($value);
+    }
 }

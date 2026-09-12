@@ -22,7 +22,7 @@ class Transporter
         #[ORM\Column(name: 'transporter_status', type: 'string', enumType: TransporterStatus::class)]
         private TransporterStatus $transporterStatus,
 
-        #[ORM\Column(name: 'company_id', type: 'company_id', nullable: true)]
+        #[ORM\Column(name: 'company_id', type: 'company_id')]
         private string $companyId,
 
         #[ORM\Column(name: 'created_at', type: 'datetime')]

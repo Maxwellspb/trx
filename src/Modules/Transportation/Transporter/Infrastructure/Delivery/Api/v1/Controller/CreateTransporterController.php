@@ -1,22 +1,22 @@
 <?php
 
-namespace App\Modules\Transportation\Transporter\Presentation\Http\v1\Controller;
+namespace App\Modules\Transportation\Transporter\Infrastructure\Delivery\Api\v1\Controller;
 
-use App\Modules\Transportation\Transporter\Presentation\Http\v1\Request\CreateTransporterRequestDto;
-use App\Modules\Transportation\Transporter\Presentation\Http\v1\Response\TransporterResponseDto;
+use App\Modules\Company\Infrastructure\Delivery\Api\v1\Request\CreateCompanyRequestDto;
+use App\Modules\Company\Infrastructure\Delivery\Api\v1\Response\CompanyResponseDto;
+use OpenApi\Attributes as OA;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 use Symfony\Component\Routing\Attribute\Route;
-use OpenApi\Attributes as OA;
 use Symfony\Component\Serializer\SerializerInterface;
 
 #[Route(path: '/api/v1/transporters', name:'api:v1:transporters_create', methods: ['POST'])]
-class TransporterCreateController extends AbstractController
+class CreateTransporterController extends AbstractController
 {
     public function __construct(
-        private SerializerInterface $serializer,
+        private readonly SerializerInterface $serializer,
     ) {}
 
     #[OA\Post(
@@ -41,10 +41,10 @@ class TransporterCreateController extends AbstractController
         )
     )]
     public function __invoke(
-        #[MapRequestPayload] CreateTransporterRequestDto $requestDto
+        #[MapRequestPayload] CreateCompanyRequestDto $requestDto
     ): JsonResponse {
 
-        $responseDto = new TransporterResponseDto(
+        $responseDto = new CompanyResponseDto(
             id: '550e8400-e29b-41d4-a716-446655440000',
             orgName: $requestDto->orgName,
             shortName: $requestDto->shortName,

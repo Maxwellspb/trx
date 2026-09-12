@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Modules\Transportation\Transporter\Presentation\Http\v1\Request;
+namespace App\Modules\Company\Infrastructure\Delivery\Api\v1\Request;
 
-use Symfony\Component\Validator\Constraints as Assert;
 use OpenApi\Attributes as OA;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[OA\Schema(
     schema: 'CreateTransporterRequestDto',
-    description: 'Данные для создания перевозчика',
+    description: 'Данные для создания компании',
     required: ['orgName', 'shortName', 'orgAddress', 'inn', 'kpp', 'ogrn'],
 )]
-final readonly class CreateTransporterRequestDto
+final readonly class CreateCompanyRequestDto
 {
     public function __construct(
         #[OA\Property(
-            description: 'Полное название перевозчика',
+            description: 'Полное название компании',
             type: 'string',
             example: 'Общество с ограниченной ответственностью СтройАвтоТранс'
         )]
@@ -22,7 +22,7 @@ final readonly class CreateTransporterRequestDto
         public string $orgName,
 
         #[OA\Property(
-            description: 'Сокращенное название перевозчика',
+            description: 'Сокращенное название компании',
             type: 'string',
             example: 'СтройАвтоТранс'
         )]
@@ -30,7 +30,7 @@ final readonly class CreateTransporterRequestDto
         public string $shortName,
 
         #[OA\Property(
-            description: 'Юридический адрес перевозчика',
+            description: 'Юридический адрес компании',
             type: 'string',
             example: 'РФ, СПб, Невский пр. 1'
         )]
@@ -38,7 +38,7 @@ final readonly class CreateTransporterRequestDto
         public string $orgAddress,
 
         #[OA\Property(
-            description: 'ИНН перевозчика',
+            description: 'ИНН компании',
             type: 'string',
             example: '6311573037'
         )]
@@ -46,7 +46,7 @@ final readonly class CreateTransporterRequestDto
         public string $inn,
 
         #[OA\Property(
-            description: 'КПП перевозчика',
+            description: 'КПП компании',
             type: 'string',
             example: '620943127'
         )]
@@ -54,7 +54,7 @@ final readonly class CreateTransporterRequestDto
         public string $kpp,
 
         #[OA\Property(
-            description: 'ОГРН перевозчика',
+            description: 'ОГРН компании',
             type: 'string',
             example: '6014667274770'
         )]

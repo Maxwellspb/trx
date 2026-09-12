@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Modules\Transportation\Transporter\Presentation\Http\v1\Response;
+namespace App\Modules\Company\Infrastructure\Delivery\Api\v1\Response;
 
-use Symfony\Component\Serializer\Attribute\Groups;
 use OpenApi\Attributes as OA;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 #[OA\Schema(
-    schema: 'TransporterResponseDto',
-    description: 'Данные перевозчика',
+    schema: 'CompanyResponseDto',
+    description: 'Данные компании',
     required: ['id', 'shortName']
 )]
-final readonly class TransporterResponseDto
+final readonly class CompanyResponseDto
 {
     public function __construct(
         #[OA\Property(
-            description: 'ID перевозчика',
+            description: 'ID компании',
             type: 'string',
             format: 'uuid',
             example: '550e8400-e29b-41d4-a716-446655440000'
@@ -23,7 +23,7 @@ final readonly class TransporterResponseDto
         public string $id,
 
         #[OA\Property(
-            description: 'Полное название перевозчика',
+            description: 'Полное название компании',
             type: 'string',
             example: 'Общество с ограниченной ответственностью СтройАвтоТранс'
         )]
@@ -31,7 +31,7 @@ final readonly class TransporterResponseDto
         public string $orgName,
 
         #[OA\Property(
-            description: 'Сокращенное название перевозчика',
+            description: 'Сокращенное название компании',
             type: 'string',
             example: 'СтройАвтоТранс'
         )]
@@ -39,7 +39,7 @@ final readonly class TransporterResponseDto
         public string $shortName,
 
         #[OA\Property(
-            description: 'Юридический адрес перевозчика',
+            description: 'Юридический адрес компании',
             type: 'string',
             example: 'РФ, СПб, Невский пр. 1'
         )]
@@ -47,7 +47,7 @@ final readonly class TransporterResponseDto
         public string $orgAddress,
 
         #[OA\Property(
-            description: 'ИНН перевозчика',
+            description: 'ИНН компании',
             type: 'string',
             example: '6311573037'
         )]
@@ -55,7 +55,7 @@ final readonly class TransporterResponseDto
         public string $inn,
 
         #[OA\Property(
-            description: 'КПП перевозчика',
+            description: 'КПП компании',
             type: 'string',
             example: '620943127'
         )]
@@ -63,7 +63,7 @@ final readonly class TransporterResponseDto
         public string $kpp,
 
         #[OA\Property(
-            description: 'ОГРН перевозчика',
+            description: 'ОГРН компании',
             type: 'string',
             example: '6014667274770'
         )]

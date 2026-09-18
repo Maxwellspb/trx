@@ -2,31 +2,31 @@
 
 namespace App\Modules\Transportation\Transporter\Infrastructure\Persistence\Doctrine;
 
-use App\Modules\Transportation\Transporter\Domain\ValueObject\CompanyId;
+use App\Modules\Transportation\Transporter\Domain\ValueObject\TransporterCompanyId;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\Type;
 
-final class CompanyIdType extends Type
+final class TransporterCompanyIdType extends Type
 {
-    public const string NAME = 'company_id';
+    public const string NAME = 'transporter_company_id';
 
     public function getSQLDeclaration(array $column, AbstractPlatform $platform): string
     {
         return $platform->getGuidTypeDeclarationSQL($column);
     }
 
-    public function convertToPHPValue($value, AbstractPlatform $platform): CompanyId
+    public function convertToPHPValue($value, AbstractPlatform $platform): TransporterCompanyId
     {
-        return CompanyId::fromString($value);
+        return TransporterCompanyId::fromString($value);
     }
 
     public function convertToDatabaseValue($value, AbstractPlatform $platform): string
     {
-        if ($value instanceof CompanyId) {
+        if ($value instanceof TransporterCompanyId) {
             return $value->getUuid7()->value;
         }
 
-        return CompanyId::fromString($value)->__toString();
+        return TransporterCompanyId::fromString($value)->__toString();
     }
 
     public function getName(): string

@@ -16,5 +16,7 @@ interface TransporterRepositoryInterface
      */
     public function getById(string $id): Transporter;
 
+    public function save(Transporter $transporter): void;
+
     public function exists(string $transporterId): bool;
 }

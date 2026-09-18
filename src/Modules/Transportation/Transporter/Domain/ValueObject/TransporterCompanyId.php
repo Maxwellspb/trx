@@ -4,7 +4,7 @@ namespace App\Modules\Transportation\Transporter\Domain\ValueObject;
 
 use App\Common\Domain\Model\Uuid7;
 
-final readonly class CompanyId
+final readonly class TransporterCompanyId
 {
     private function __construct(
         private Uuid7 $uuid7

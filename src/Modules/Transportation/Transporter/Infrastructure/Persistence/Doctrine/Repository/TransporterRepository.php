@@ -18,6 +18,11 @@ class TransporterRepository implements TransporterRepositoryInterface
         // TODO: Implement getById() method.
     }
 
+    public function save(Transporter $transporter): void
+    {
+
+    }
+
     public function exists(string $transporterId): bool
     {
         // TODO: Implement exists() method.

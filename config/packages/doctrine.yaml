@@ -26,6 +26,12 @@ doctrine:
                         dir: '%kernel.project_dir%/src/Modules/Transportation/Transporter/Domain/Entity'
                         prefix: 'App\Modules\Transportation\Transporter\Domain\Entity'
                         alias: Transporter
+                    TransporterCompanyLink:
+                      is_bundle: false
+                      type: attribute
+                      dir: '%kernel.project_dir%/src/Modules/Transportation/Transporter/Domain/Entity'
+                      prefix: 'App\Modules\Transportation\Transporter\Domain\Entity'
+                      alias: TransporterCompanyLink
 
 when@test:
     doctrine:

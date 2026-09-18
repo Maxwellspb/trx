@@ -6,6 +6,7 @@ use App\Modules\Transportation\Transporter\Domain\Enum\TransporterStatus;
 use App\Modules\Transportation\Transporter\Domain\ValueObject\TransporterId;
 use App\Modules\Transportation\Transporter\Infrastructure\Persistence\Doctrine\Repository\TransporterRepository;
 use DateTime;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: TransporterRepository::class)]
@@ -22,8 +23,8 @@ class Transporter
         #[ORM\Column(name: 'transporter_status', type: 'string', enumType: TransporterStatus::class)]
         private TransporterStatus $transporterStatus,
 
-        #[ORM\Column(name: 'company_id', type: 'company_id')]
-        private string $companyId,
+        #[ORM\OneToMany(targetEntity: TransporterCompanyLink::class, mappedBy: 'transporter')]
+        private Collection $transporterCompanyLinks,
 
         #[ORM\Column(name: 'created_at', type: 'datetime')]
         private DateTime $createdAt,

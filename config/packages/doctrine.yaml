@@ -4,7 +4,8 @@ doctrine:
         url: '%env(resolve:DATABASE_URL)%'
         types:
             transporter_id: App\Modules\Transportation\Transporter\Infrastructure\Persistence\Doctrine\TransporterIdType
-            company_id: App\Modules\Transportation\Transporter\Infrastructure\Persistence\Doctrine\CompanyIdType
+            transporter_company_id: App\Modules\Transportation\Transporter\Infrastructure\Persistence\Doctrine\TransporterCompanyIdType
+            transporter_company_link_id: App\Modules\Transportation\Transporter\Infrastructure\Persistence\Doctrine\TransporterCompanyLinkIdType
 
         # IMPORTANT: You MUST configure your server version,
         # either here or in the DATABASE_URL env var (see .env file)

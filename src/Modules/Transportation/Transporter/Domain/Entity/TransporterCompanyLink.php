@@ -2,6 +2,7 @@
 
 namespace App\Modules\Transportation\Transporter\Domain\Entity;
 
+use App\Modules\Transportation\Transporter\Domain\ValueObject\TransporterCompanyId;
 use App\Modules\Transportation\Transporter\Domain\ValueObject\TransporterCompanyLinkId;
 use App\Modules\Transportation\Transporter\Infrastructure\Persistence\Doctrine\Repository\TransporterCompanyIdRepository;
 use DateTime;
@@ -22,10 +23,10 @@ class TransporterCompanyLink
         private TransporterCompanyId $transporterCompanyId,
 
         #[ORM\Column(name: 'created_at', type: 'datetime')]
-        private DateTime $createdAt,
+        private DateTime $createdAt = new DateTime('now'),
 
         #[ORM\Column(name: 'updated_at', type: 'datetime')]
-        private DateTime $updatedAt,
+        private DateTime $updatedAt = new DateTime('now'),
     ) {}
 
     public function getId(): TransporterCompanyLinkId
@@ -38,5 +39,12 @@ class TransporterCompanyLink
     public function onPreUpdate(): void
     {
         $this->updatedAt = new DateTime("now");
+    }
+
+    public function setTransporter(Transporter $transporter): self
+    {
+        $this->transporter = $transporter;
+
+        return $this;
     }
 }

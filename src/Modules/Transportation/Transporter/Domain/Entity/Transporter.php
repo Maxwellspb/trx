@@ -6,6 +6,7 @@ use App\Modules\Transportation\Transporter\Domain\Enum\TransporterStatus;
 use App\Modules\Transportation\Transporter\Domain\ValueObject\TransporterId;
 use App\Modules\Transportation\Transporter\Infrastructure\Persistence\Doctrine\Repository\TransporterRepository;
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -20,17 +21,17 @@ class Transporter
         #[ORM\Column(name: 'name', length: 255, unique: true)]
         private string $alias,
 
-        #[ORM\Column(name: 'transporter_status', type: 'string', enumType: TransporterStatus::class)]
-        private TransporterStatus $transporterStatus,
+        #[ORM\Column(name: 'transporter_status', type: 'string', enumType: TransporterStatus::class, options: ['default' => TransporterStatus::PENDING->value])]
+        private TransporterStatus $transporterStatus = TransporterStatus::PENDING,
 
-        #[ORM\OneToMany(targetEntity: TransporterCompanyLink::class, mappedBy: 'transporter')]
-        private Collection $transporterCompanyLinks,
+        #[ORM\OneToMany(targetEntity: TransporterCompanyLink::class, mappedBy: 'transporter', cascade: ['persist'])]
+        private Collection $transporterCompanyLinks = new ArrayCollection(),
 
         #[ORM\Column(name: 'created_at', type: 'datetime')]
-        private DateTime $createdAt,
+        private DateTime $createdAt = new DateTime('now'),
 
         #[ORM\Column(name: 'updated_at', type: 'datetime')]
-        private DateTime $updatedAt,
+        private DateTime $updatedAt = new DateTime('now'),
     ) {}
 
     public function getId(): TransporterId
@@ -53,5 +54,18 @@ class Transporter
     public function onPreUpdate(): void
     {
         $this->updatedAt = new DateTime("now");
+    }
+
+    public function getTransporterCompanyLinks(): Collection
+    {
+        return $this->transporterCompanyLinks;
+    }
+
+    public function linkCompany(TransporterCompanyLink $transporterCompanyLink): self
+    {
+        $this->transporterCompanyLinks->add($transporterCompanyLink);
+        $transporterCompanyLink->setTransporter($this);
+
+        return $this;
     }
 }

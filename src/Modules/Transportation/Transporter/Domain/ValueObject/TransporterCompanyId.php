@@ -15,6 +15,11 @@ final readonly class TransporterCompanyId
         return new self(Uuid7::fromString($value));
     }
 
+    public static function fromUuid(Uuid7 $uuid7): self
+    {
+        return new self($uuid7);
+    }
+
     public function getUuid7(): Uuid7
     {
         return $this->uuid7;

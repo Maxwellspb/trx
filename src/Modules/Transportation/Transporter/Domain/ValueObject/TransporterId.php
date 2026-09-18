@@ -10,6 +10,11 @@ final readonly class TransporterId
         private Uuid7 $uuid7
     ) {}
 
+    public static function fromUuid(Uuid7 $uuid7): self
+    {
+        return new self($uuid7);
+    }
+
     public static function fromString(string $value): self
     {
         return new self(Uuid7::fromString($value));

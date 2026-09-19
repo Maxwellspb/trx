@@ -28,7 +28,10 @@ class CreateTransporterHandler
     {
         $transporter = $this
             ->transporterFactory
-            ->create($command->alias);
+            ->create(
+                $command->alias,
+                $command->transporterStatus
+            );
 
         $this->linkCompaniesIfExist($transporter, $command);
 

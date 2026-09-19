@@ -4,6 +4,7 @@ namespace App\Modules\Transportation\Transporter\Infrastructure\Delivery\Api\v1\
 
 use App\Modules\Company\Infrastructure\Delivery\Api\v1\Request\CreateCompanyRequestDto;
 use App\Modules\Company\Infrastructure\Delivery\Api\v1\Response\CompanyResponseDto;
+use App\Modules\Transportation\Transporter\Infrastructure\Delivery\Api\v1\Request\CreateTransporterRequestDto;
 use OpenApi\Attributes as OA;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -33,32 +34,13 @@ class CreateTransporterController extends AbstractController
         )
     )]
     #[OA\Response(
-        response: 201,
-        description: 'Перевозчик успешно создан',
-        content: new OA\MediaType(
-            mediaType: 'application/json',
-            schema: new OA\Schema(ref: '#/components/schemas/TransporterResponseDto')
-        )
+        response: 202,
+        description: 'Запрос принят в обработку, результат будет доступен позже'
     )]
     public function __invoke(
-        #[MapRequestPayload] CreateCompanyRequestDto $requestDto
+        #[MapRequestPayload] CreateTransporterRequestDto $requestDto
     ): JsonResponse {
 
-        $responseDto = new CompanyResponseDto(
-            id: '550e8400-e29b-41d4-a716-446655440000',
-            orgName: $requestDto->orgName,
-            shortName: $requestDto->shortName,
-            orgAddress: $requestDto->orgAddress,
-            inn: $requestDto->inn,
-            kpp: $requestDto->kpp,
-            ogrn: $requestDto->ogrn,
-        );
-
-        $response = $this
-            ->serializer
-            ->normalize($responseDto, );
-
-        return $this
-            ->json($response, Response::HTTP_CREATED);
+        return $this->json(null, Response::HTTP_ACCEPTED);
     }
 }

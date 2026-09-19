@@ -20,12 +20,7 @@ final readonly class TransporterCompanyId
         return new self($uuid7);
     }
 
-    public function getUuid7(): Uuid7
-    {
-        return $this->uuid7;
-    }
-
-    public function __toString(): string
+    public function getValue(): string
     {
         return $this->uuid7->value;
     }

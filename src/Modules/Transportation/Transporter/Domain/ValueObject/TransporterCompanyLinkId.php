@@ -20,9 +20,9 @@ class TransporterCompanyLinkId
         return new self($uuid7);
     }
 
-    public function getUuid7(): Uuid7
+    public function getValue(): string
     {
-        return $this->uuid7;
+        return $this->uuid7->value;
     }
 
     public function __toString(): string

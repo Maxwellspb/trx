@@ -23,10 +23,10 @@ final class TransporterIdType extends Type
     public function convertToDatabaseValue($value, AbstractPlatform $platform): ?string
     {
         if ($value instanceof TransporterId) {
-            return $value->getUuid7()->value;
+            return $value->getValue();
         }
 
-        return TransporterId::fromString($value)->__toString();
+        return TransporterId::fromString($value)->getValue();
     }
 
     public function getName(): string
